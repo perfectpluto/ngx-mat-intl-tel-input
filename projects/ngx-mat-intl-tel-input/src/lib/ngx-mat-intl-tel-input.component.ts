@@ -116,6 +116,7 @@ export class NgxMatIntlTelInputComponent
   @Input() cssClass: string | undefined;
   @Input() name: string | undefined;
   @Input() onlyCountries: Array<string> = [];
+  @Input() skipCountries: Array<string> = [];
   @Input() errorStateMatcher: ErrorStateMatcher = new ErrorStateMatcher();
   @Input() enableSearch = false;
   @Input() searchPlaceholder: string | undefined;
@@ -204,6 +205,11 @@ export class NgxMatIntlTelInputComponent
     if (this.onlyCountries.length) {
       this.allCountries = this.allCountries.filter((c) =>
         this.onlyCountries.includes(c.iso2)
+      );
+    }
+    if (this.skipCountries && this.skipCountries.length) {
+      this.allCountries = this.allCountries.filter((c) =>
+        !this.onlyCountries.includes(c.iso2)
       );
     }
     if (this.numberInstance && this.numberInstance.country) {
